@@ -3,15 +3,17 @@ import { Link } from 'react-router-dom';
 import { Header } from '../components/Header';
 import { Footer } from '../components/Footer';
 import { Button } from '@/components/ui/button';
-
-const dolls = [
-  { id: 1, name: 'Rosie', price: 29.99, category: 'Clothing Dolls' },
-  { id: 2, name: 'Daisy', price: 34.99, category: 'Baby Dolls' },
-  { id: 3, name: 'Lily', price: 39.99, category: 'Animal Dolls' },
-  { id: 4, name: 'Poppy', price: 27.99, category: 'Clothing Dolls' },
-];
+import useProductStore from '../lib/productState';
 
 const AdminDashboard = () => {
+  const { products, deleteProduct } = useProductStore();
+
+  const handleDelete = (id) => {
+    if (window.confirm('Are you sure you want to delete this product?')) {
+      deleteProduct(id);
+    }
+  };
+
   return (
     <div className="min-h-screen flex flex-col bg-gray-100">
       <Header />
@@ -29,17 +31,17 @@ const AdminDashboard = () => {
               </tr>
             </thead>
             <tbody>
-              {dolls.map((doll) => (
-                <tr key={doll.id} className="border-b">
-                  <td className="px-4 py-2">{doll.id}</td>
-                  <td className="px-4 py-2">{doll.name}</td>
-                  <td className="px-4 py-2">${doll.price.toFixed(2)}</td>
-                  <td className="px-4 py-2">{doll.category}</td>
+              {products.map((product) => (
+                <tr key={product.id} className="border-b">
+                  <td className="px-4 py-2">{product.id}</td>
+                  <td className="px-4 py-2">{product.name}</td>
+                  <td className="px-4 py-2">${product.price.toFixed(2)}</td>
+                  <td className="px-4 py-2">{product.category}</td>
                   <td className="px-4 py-2">
-                    <Link to={`/admin/edit/${doll.id}`}>
+                    <Link to={`/admin/edit/${product.id}`}>
                       <Button variant="outline" className="mr-2">Edit</Button>
                     </Link>
-                    <Button variant="destructive">Delete</Button>
+                    <Button variant="destructive" onClick={() => handleDelete(product.id)}>Delete</Button>
                   </td>
                 </tr>
               ))}

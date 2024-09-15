@@ -6,10 +6,12 @@ import { Label } from '@/components/ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Header } from './Header';
 import { Footer } from './Footer';
+import useProductStore from '../lib/productState';
 
 const AdminProductEdit = () => {
   const { id } = useParams();
   const navigate = useNavigate();
+  const { products, updateProduct } = useProductStore();
   const [product, setProduct] = useState({
     id: '',
     name: '',
@@ -18,20 +20,11 @@ const AdminProductEdit = () => {
   });
 
   useEffect(() => {
-    // Simulating fetching product data
-    const fetchProduct = async () => {
-      // In a real app, you would fetch the product from an API
-      const dummyProduct = {
-        id: id,
-        name: 'Dummy Doll',
-        price: '29.99',
-        category: 'Clothing Dolls'
-      };
-      setProduct(dummyProduct);
-    };
-
-    fetchProduct();
-  }, [id]);
+    const productToEdit = products.find(p => p.id === parseInt(id));
+    if (productToEdit) {
+      setProduct(productToEdit);
+    }
+  }, [id, products]);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -44,9 +37,7 @@ const AdminProductEdit = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Here you would typically send the updated product data to your backend
-    console.log('Updated product:', product);
-    // Navigate back to the admin dashboard after saving
+    updateProduct({ ...product, price: parseFloat(product.price) });
     navigate('/admin');
   };
 
