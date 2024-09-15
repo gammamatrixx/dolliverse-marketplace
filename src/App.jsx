@@ -9,6 +9,7 @@ import ClothingDolls from "./pages/ClothingDolls";
 import BabyDolls from "./pages/BabyDolls";
 import AnimalDolls from "./pages/AnimalDolls";
 import AdminDashboard from "./pages/AdminDashboard";
+import AdminProductEdit from "./components/AdminProductEdit";
 
 const queryClient = new QueryClient();
 
@@ -42,6 +43,7 @@ const App = () => (
             }
             return <Route key={to} path={to} element={<Component />} />;
           })}
+          <Route path="/admin/edit/:id" element={<AdminProductEdit />} />
         </Routes>
       </BrowserRouter>
     </TooltipProvider>

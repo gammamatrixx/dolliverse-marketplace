@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { Header } from '../components/Header';
 import { Footer } from '../components/Footer';
 import { Table } from '@/components/ui/table';
@@ -36,7 +37,9 @@ const AdminDashboard = () => {
                   <td className="px-4 py-2">${doll.price.toFixed(2)}</td>
                   <td className="px-4 py-2">{doll.category}</td>
                   <td className="px-4 py-2">
-                    <Button variant="outline" className="mr-2">Edit</Button>
+                    <Link to={`/admin/edit/${doll.id}`}>
+                      <Button variant="outline" className="mr-2">Edit</Button>
+                    </Link>
                     <Button variant="destructive">Delete</Button>
                   </td>
                 </tr>
