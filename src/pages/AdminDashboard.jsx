@@ -17,31 +17,33 @@ const AdminDashboard = () => {
       <Header />
       <main className="flex-grow container mx-auto px-4 py-8">
         <h1 className="text-4xl font-bold mb-8 text-center">Admin Dashboard</h1>
-        <Table>
-          <Table.Header>
-            <Table.Row>
-              <Table.Head>ID</Table.Head>
-              <Table.Head>Name</Table.Head>
-              <Table.Head>Price</Table.Head>
-              <Table.Head>Category</Table.Head>
-              <Table.Head>Actions</Table.Head>
-            </Table.Row>
-          </Table.Header>
-          <Table.Body>
-            {dolls.map((doll) => (
-              <Table.Row key={doll.id}>
-                <Table.Cell>{doll.id}</Table.Cell>
-                <Table.Cell>{doll.name}</Table.Cell>
-                <Table.Cell>${doll.price.toFixed(2)}</Table.Cell>
-                <Table.Cell>{doll.category}</Table.Cell>
-                <Table.Cell>
-                  <Button variant="outline" className="mr-2">Edit</Button>
-                  <Button variant="destructive">Delete</Button>
-                </Table.Cell>
-              </Table.Row>
-            ))}
-          </Table.Body>
-        </Table>
+        <div className="overflow-x-auto">
+          <table className="w-full bg-white shadow-md rounded-lg overflow-hidden">
+            <thead className="bg-gray-200">
+              <tr>
+                <th className="px-4 py-2">ID</th>
+                <th className="px-4 py-2">Name</th>
+                <th className="px-4 py-2">Price</th>
+                <th className="px-4 py-2">Category</th>
+                <th className="px-4 py-2">Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              {dolls.map((doll) => (
+                <tr key={doll.id} className="border-b">
+                  <td className="px-4 py-2">{doll.id}</td>
+                  <td className="px-4 py-2">{doll.name}</td>
+                  <td className="px-4 py-2">${doll.price.toFixed(2)}</td>
+                  <td className="px-4 py-2">{doll.category}</td>
+                  <td className="px-4 py-2">
+                    <Button variant="outline" className="mr-2">Edit</Button>
+                    <Button variant="destructive">Delete</Button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       </main>
       <Footer />
     </div>
