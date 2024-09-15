@@ -9,7 +9,7 @@ const AnimalDolls = () => {
       <Header />
       <main className="flex-grow container mx-auto px-4 py-8">
         <h1 className="text-4xl font-bold mb-8 text-center">Animal Dolls</h1>
-        <DollList />
+        <DollList category="Animal Dolls" />
       </main>
       <Footer />
     </div>
