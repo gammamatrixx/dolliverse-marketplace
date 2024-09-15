@@ -2,7 +2,6 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Header } from '../components/Header';
 import { Footer } from '../components/Footer';
-import { Table } from '@/components/ui/table';
 import { Button } from '@/components/ui/button';
 
 const dolls = [
