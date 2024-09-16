@@ -34,15 +34,23 @@ const ProductPage = () => {
           <div className="md:flex">
             <div className="md:flex-shrink-0">
               <div className="relative w-full h-96">
-                {product.images.map((image, index) => (
+                {product.images && product.images.length > 0 ? (
+                  product.images.map((image, index) => (
+                    <img
+                      key={index}
+                      className="absolute top-0 left-0 w-full h-full object-cover transition-opacity duration-500 ease-in-out"
+                      src={image}
+                      alt={`${product.name} - Image ${index + 1}`}
+                      style={{ opacity: index === 0 ? 1 : 0 }}
+                    />
+                  ))
+                ) : (
                   <img
-                    key={index}
-                    className="absolute top-0 left-0 w-full h-full object-cover transition-opacity duration-500 ease-in-out"
-                    src={image}
-                    alt={`${product.name} - Image ${index + 1}`}
-                    style={{ opacity: index === 0 ? 1 : 0 }}
+                    src="/placeholder.svg"
+                    alt={product.name}
+                    className="w-full h-full object-cover"
                   />
-                ))}
+                )}
               </div>
             </div>
             <div className="p-8">
@@ -55,7 +63,7 @@ const ProductPage = () => {
               </Button>
             </div>
           </div>
-          {product.videos.length > 0 && (
+          {product.videos && product.videos.length > 0 && (
             <div className="p-8">
               <h2 className="text-2xl font-bold mb-4">Product Videos</h2>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">

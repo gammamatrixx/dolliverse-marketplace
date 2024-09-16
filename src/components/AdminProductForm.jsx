@@ -36,10 +36,16 @@ const AdminProductForm = ({ product, mode }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    const productData = {
+      ...formData,
+      price: parseFloat(formData.price),
+      images: formData.images,
+      videos: formData.videos
+    };
     if (mode === 'add') {
-      addProduct({ ...formData, price: parseFloat(formData.price) });
+      addProduct(productData);
     } else {
-      updateProduct({ ...formData, price: parseFloat(formData.price) });
+      updateProduct(productData);
     }
     navigate('/admin');
   };

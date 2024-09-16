@@ -45,7 +45,7 @@ const useProductStore = create((set, get) => ({
   updateProduct: (updatedProduct) =>
     set((state) => ({
       products: state.products.map((product) =>
-        product.id === updatedProduct.id ? updatedProduct : product
+        product.id === updatedProduct.id ? { ...product, ...updatedProduct } : product
       ),
     })),
   deleteProduct: (productId) =>
