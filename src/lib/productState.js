@@ -2,10 +2,38 @@ import { create } from 'zustand';
 
 const useProductStore = create((set, get) => ({
   products: [
-    { id: 1, name: 'Rosie', price: 29.99, category: 'Clothing Dolls', image: '/placeholder.svg' },
-    { id: 2, name: 'Daisy', price: 34.99, category: 'Baby Dolls', image: '/placeholder.svg' },
-    { id: 3, name: 'Lily', price: 39.99, category: 'Animal Dolls', image: '/placeholder.svg' },
-    { id: 4, name: 'Poppy', price: 27.99, category: 'Clothing Dolls', image: '/placeholder.svg' },
+    { 
+      id: 1, 
+      name: 'Rosie', 
+      price: 29.99, 
+      category: 'Clothing Dolls', 
+      image: '/placeholder.svg',
+      description: 'A beautiful doll with a floral dress and rosy cheeks.'
+    },
+    { 
+      id: 2, 
+      name: 'Daisy', 
+      price: 34.99, 
+      category: 'Baby Dolls', 
+      image: '/placeholder.svg',
+      description: 'A cute baby doll with soft skin and bright blue eyes.'
+    },
+    { 
+      id: 3, 
+      name: 'Lily', 
+      price: 39.99, 
+      category: 'Animal Dolls', 
+      image: '/placeholder.svg',
+      description: 'An adorable plush cat doll with silky fur and a pink bow.'
+    },
+    { 
+      id: 4, 
+      name: 'Poppy', 
+      price: 27.99, 
+      category: 'Clothing Dolls', 
+      image: '/placeholder.svg',
+      description: 'A charming doll with a red polka dot dress and blonde hair.'
+    },
   ],
   cart: [],
   user: null,

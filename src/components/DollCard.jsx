@@ -1,16 +1,18 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import useProductStore from '../lib/productState';
 
 export const DollCard = ({ doll }) => {
   const addToCart = useProductStore((state) => state.addToCart);
 
-  const handleAddToCart = () => {
+  const handleAddToCart = (e) => {
+    e.preventDefault();
     addToCart(doll);
   };
 
   return (
-    <div className="bg-white rounded-lg shadow-md overflow-hidden">
+    <Link to={`/product/${doll.id}`} className="bg-white rounded-lg shadow-md overflow-hidden block">
       <img src={doll.image} alt={doll.name} className="w-full h-48 object-cover" />
       <div className="p-4">
         <h2 className="text-xl font-semibold mb-2">{doll.name}</h2>
@@ -19,6 +21,6 @@ export const DollCard = ({ doll }) => {
           Add to Cart
         </Button>
       </div>
-    </div>
+    </Link>
   );
 };
