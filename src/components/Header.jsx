@@ -2,8 +2,11 @@ import React from 'react';
 import { ShoppingCart } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { navItems } from '../nav-items';
+import useProductStore from '../lib/productState';
 
 export const Header = () => {
+  const cartItemCount = useProductStore((state) => state.cart.length);
+
   return (
     <header className="bg-white shadow-md">
       <div className="container mx-auto px-4 py-4 flex justify-between items-center">
@@ -20,9 +23,14 @@ export const Header = () => {
             ))}
           </ul>
         </nav>
-        <button className="text-gray-600 hover:text-pink-600">
+        <Link to="/cart" className="text-gray-600 hover:text-pink-600 relative">
           <ShoppingCart className="h-6 w-6" />
-        </button>
+          {cartItemCount > 0 && (
+            <span className="absolute -top-2 -right-2 bg-pink-500 text-white rounded-full w-5 h-5 flex items-center justify-center text-xs">
+              {cartItemCount}
+            </span>
+          )}
+        </Link>
       </div>
     </header>
   );
