@@ -33,7 +33,17 @@ const ProductPage = () => {
         <div className="bg-white shadow-md rounded-lg overflow-hidden">
           <div className="md:flex">
             <div className="md:flex-shrink-0">
-              <img className="h-48 w-full object-cover md:w-48" src={product.image} alt={product.name} />
+              <div className="relative w-full h-96">
+                {product.images.map((image, index) => (
+                  <img
+                    key={index}
+                    className="absolute top-0 left-0 w-full h-full object-cover transition-opacity duration-500 ease-in-out"
+                    src={image}
+                    alt={`${product.name} - Image ${index + 1}`}
+                    style={{ opacity: index === 0 ? 1 : 0 }}
+                  />
+                ))}
+              </div>
             </div>
             <div className="p-8">
               <h1 className="text-3xl font-bold mb-2">{product.name}</h1>
@@ -45,6 +55,16 @@ const ProductPage = () => {
               </Button>
             </div>
           </div>
+          {product.videos.length > 0 && (
+            <div className="p-8">
+              <h2 className="text-2xl font-bold mb-4">Product Videos</h2>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                {product.videos.map((video, index) => (
+                  <video key={index} src={video} className="w-full" controls />
+                ))}
+              </div>
+            </div>
+          )}
         </div>
       </main>
       <Footer />

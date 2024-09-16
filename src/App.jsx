@@ -10,6 +10,7 @@ import BabyDolls from "./pages/BabyDolls";
 import AnimalDolls from "./pages/AnimalDolls";
 import AdminDashboard from "./pages/AdminDashboard";
 import AdminProductEdit from "./components/AdminProductEdit";
+import AdminProductForm from "./components/AdminProductForm";
 import CartPage from "./pages/CartPage";
 import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
@@ -48,6 +49,7 @@ const App = () => (
             return <Route key={to} path={to} element={<Component />} />;
           })}
           <Route path="/admin/edit/:id" element={<AdminProductEdit />} />
+          <Route path="/admin/add" element={<AdminProductForm mode="add" />} />
           <Route path="/cart" element={<CartPage />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/register" element={<RegisterPage />} />

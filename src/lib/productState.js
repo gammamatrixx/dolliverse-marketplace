@@ -7,7 +7,8 @@ const useProductStore = create((set, get) => ({
       name: 'Rosie', 
       price: 29.99, 
       category: 'Clothing Dolls', 
-      image: '/placeholder.svg',
+      images: ['/placeholder.svg'],
+      videos: [],
       description: 'A beautiful doll with a floral dress and rosy cheeks.'
     },
     { 
@@ -15,7 +16,8 @@ const useProductStore = create((set, get) => ({
       name: 'Daisy', 
       price: 34.99, 
       category: 'Baby Dolls', 
-      image: '/placeholder.svg',
+      images: ['/placeholder.svg'],
+      videos: [],
       description: 'A cute baby doll with soft skin and bright blue eyes.'
     },
     { 
@@ -23,7 +25,8 @@ const useProductStore = create((set, get) => ({
       name: 'Lily', 
       price: 39.99, 
       category: 'Animal Dolls', 
-      image: '/placeholder.svg',
+      images: ['/placeholder.svg'],
+      videos: [],
       description: 'An adorable plush cat doll with silky fur and a pink bow.'
     },
     { 
@@ -31,7 +34,8 @@ const useProductStore = create((set, get) => ({
       name: 'Poppy', 
       price: 27.99, 
       category: 'Clothing Dolls', 
-      image: '/placeholder.svg',
+      images: ['/placeholder.svg'],
+      videos: [],
       description: 'A charming doll with a red polka dot dress and blonde hair.'
     },
   ],
@@ -47,6 +51,10 @@ const useProductStore = create((set, get) => ({
   deleteProduct: (productId) =>
     set((state) => ({
       products: state.products.filter((product) => product.id !== productId),
+    })),
+  addProduct: (newProduct) =>
+    set((state) => ({
+      products: [...state.products, { ...newProduct, id: state.products.length + 1 }],
     })),
   addToCart: (product) =>
     set((state) => ({

@@ -18,7 +18,12 @@ const AdminDashboard = () => {
     <div className="min-h-screen flex flex-col bg-gray-100">
       <Header />
       <main className="flex-grow container mx-auto px-4 py-8">
-        <h1 className="text-4xl font-bold mb-8 text-center">Admin Dashboard</h1>
+        <div className="flex justify-between items-center mb-8">
+          <h1 className="text-4xl font-bold">Admin Dashboard</h1>
+          <Link to="/admin/add">
+            <Button className="bg-green-500 hover:bg-green-600 text-white">Add Product</Button>
+          </Link>
+        </div>
         <div className="overflow-x-auto">
           <table className="w-full bg-white shadow-md rounded-lg overflow-hidden">
             <thead className="bg-gray-200">
