@@ -1,6 +1,6 @@
 import { create } from 'zustand';
 
-const useProductStore = create((set) => ({
+const useProductStore = create((set, get) => ({
   products: [
     { id: 1, name: 'Rosie', price: 29.99, category: 'Clothing Dolls', image: '/placeholder.svg' },
     { id: 2, name: 'Daisy', price: 34.99, category: 'Baby Dolls', image: '/placeholder.svg' },
@@ -9,6 +9,7 @@ const useProductStore = create((set) => ({
   ],
   cart: [],
   user: null,
+  userDatabase: {},
   updateProduct: (updatedProduct) =>
     set((state) => ({
       products: state.products.map((product) =>
@@ -35,16 +36,26 @@ const useProductStore = create((set) => ({
     })),
   clearCart: () => set({ cart: [] }),
   login: (username, password) => {
-    // Simple authentication (replace with proper authentication in production)
-    if (username && password) {
+    const { userDatabase } = get();
+    if (userDatabase[username] && userDatabase[username].password === password) {
       set({ user: { username } });
+      return { success: true };
     }
+    return { success: false, error: 'Invalid username or password' };
   },
   register: (username, password) => {
-    // Simple registration (replace with proper registration in production)
-    if (username && password) {
-      set({ user: { username } });
+    const { userDatabase } = get();
+    if (userDatabase[username]) {
+      return { success: false, error: 'Username already exists' };
     }
+    set((state) => ({
+      userDatabase: {
+        ...state.userDatabase,
+        [username]: { password }
+      }
+    }));
+    set({ user: { username } });
+    return { success: true };
   },
   logout: () => set({ user: null }),
 }));
