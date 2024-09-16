@@ -1,10 +1,12 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Header } from '../components/Header';
 import { Footer } from '../components/Footer';
 import { Button } from '@/components/ui/button';
 import useProductStore from '../lib/productState';
 
 const CartPage = () => {
+  const navigate = useNavigate();
   const { cart, removeFromCart, updateCartItemQuantity, clearCart } = useProductStore();
 
   const total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
@@ -20,8 +22,7 @@ const CartPage = () => {
   };
 
   const handleCheckout = () => {
-    alert('Thank you for your purchase!');
-    clearCart();
+    navigate('/payment');
   };
 
   return (
@@ -37,7 +38,7 @@ const CartPage = () => {
               {cart.map((item) => (
                 <div key={item.id} className="flex items-center justify-between p-4 border-b">
                   <div className="flex items-center">
-                    <img src={item.image} alt={item.name} className="w-16 h-16 object-cover mr-4" />
+                    <img src={item.images[0] || '/placeholder.svg'} alt={item.name} className="w-16 h-16 object-cover mr-4" />
                     <div>
                       <h2 className="text-lg font-semibold">{item.name}</h2>
                       <p className="text-gray-600">${item.price.toFixed(2)}</p>
@@ -79,7 +80,7 @@ const CartPage = () => {
                 Clear Cart
               </Button>
               <Button className="bg-pink-500 hover:bg-pink-600 text-white" onClick={handleCheckout}>
-                Checkout
+                Proceed to Checkout
               </Button>
             </div>
           </>
