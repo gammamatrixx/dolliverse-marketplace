@@ -8,6 +8,7 @@ const useProductStore = create((set) => ({
     { id: 4, name: 'Poppy', price: 27.99, category: 'Clothing Dolls', image: '/placeholder.svg' },
   ],
   cart: [],
+  user: null,
   updateProduct: (updatedProduct) =>
     set((state) => ({
       products: state.products.map((product) =>
@@ -33,6 +34,19 @@ const useProductStore = create((set) => ({
       ),
     })),
   clearCart: () => set({ cart: [] }),
+  login: (username, password) => {
+    // Simple authentication (replace with proper authentication in production)
+    if (username && password) {
+      set({ user: { username } });
+    }
+  },
+  register: (username, password) => {
+    // Simple registration (replace with proper registration in production)
+    if (username && password) {
+      set({ user: { username } });
+    }
+  },
+  logout: () => set({ user: null }),
 }));
 
 export default useProductStore;
