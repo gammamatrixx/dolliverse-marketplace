@@ -11,6 +11,8 @@ import AnimalDolls from "./pages/AnimalDolls";
 import AdminDashboard from "./pages/AdminDashboard";
 import AdminProductEdit from "./components/AdminProductEdit";
 import CartPage from "./pages/CartPage";
+import LoginPage from "./pages/LoginPage";
+import RegisterPage from "./pages/RegisterPage";
 
 const queryClient = new QueryClient();
 
@@ -46,6 +48,8 @@ const App = () => (
           })}
           <Route path="/admin/edit/:id" element={<AdminProductEdit />} />
           <Route path="/cart" element={<CartPage />} />
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/register" element={<RegisterPage />} />
         </Routes>
       </BrowserRouter>
     </TooltipProvider>
