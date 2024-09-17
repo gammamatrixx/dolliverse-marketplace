@@ -5,6 +5,7 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import useProductStore from '../lib/productState';
 
 const AdminProductForm = ({ product, mode }) => {
@@ -16,7 +17,8 @@ const AdminProductForm = ({ product, mode }) => {
     category: '',
     description: '',
     images: [],
-    videos: []
+    videos: [],
+    placeholderImage: ''
   });
 
   const handleInputChange = (e) => {
@@ -31,7 +33,15 @@ const AdminProductForm = ({ product, mode }) => {
   const handleMediaUpload = (e, type) => {
     const files = Array.from(e.target.files);
     const mediaUrls = files.map(file => URL.createObjectURL(file));
-    setFormData(prev => ({ ...prev, [type]: [...prev[type], ...mediaUrls] }));
+    setFormData(prev => ({ 
+      ...prev, 
+      [type]: [...prev[type], ...mediaUrls],
+      placeholderImage: prev.placeholderImage || (type === 'images' ? mediaUrls[0] : prev.placeholderImage)
+    }));
+  };
+
+  const handlePlaceholderChange = (value) => {
+    setFormData(prev => ({ ...prev, placeholderImage: value }));
   };
 
   const handleSubmit = (e) => {
@@ -40,7 +50,8 @@ const AdminProductForm = ({ product, mode }) => {
       ...formData,
       price: parseFloat(formData.price),
       images: formData.images,
-      videos: formData.videos
+      videos: formData.videos,
+      placeholderImage: formData.placeholderImage
     };
     if (mode === 'add') {
       addProduct(productData);
@@ -113,6 +124,20 @@ const AdminProductForm = ({ product, mode }) => {
           ))}
         </div>
       </div>
+      {formData.images.length > 0 && (
+        <div>
+          <Label>Select Placeholder Image</Label>
+          <RadioGroup value={formData.placeholderImage} onValueChange={handlePlaceholderChange}>
+            {formData.images.map((image, index) => (
+              <div key={index} className="flex items-center space-x-2">
+                <RadioGroupItem value={image} id={`placeholder-${index}`} />
+                <Label htmlFor={`placeholder-${index}`}>Image {index + 1}</Label>
+                <img src={image} alt={`Placeholder ${index + 1}`} className="w-10 h-10 object-cover" />
+              </div>
+            ))}
+          </RadioGroup>
+        </div>
+      )}
       <div>
         <Label htmlFor="videos">Videos</Label>
         <Input

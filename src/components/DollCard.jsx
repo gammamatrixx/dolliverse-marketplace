@@ -14,7 +14,7 @@ export const DollCard = ({ doll }) => {
   return (
     <Link to={`/product/${doll.id}`} className="bg-white rounded-lg shadow-md overflow-hidden block">
       <img 
-        src={doll.images && doll.images.length > 0 ? doll.images[0] : '/placeholder.svg'} 
+        src={doll.placeholderImage || (doll.images && doll.images.length > 0 ? doll.images[0] : '/placeholder.svg')} 
         alt={doll.name} 
         className="w-full h-48 object-cover"
       />

@@ -9,7 +9,8 @@ const useProductStore = create((set, get) => ({
       category: 'Clothing Dolls', 
       images: ['/placeholder.svg'],
       videos: [],
-      description: 'A beautiful doll with a floral dress and rosy cheeks.'
+      description: 'A beautiful doll with a floral dress and rosy cheeks.',
+      placeholderImage: '/placeholder.svg'
     },
     { 
       id: 2, 
@@ -18,7 +19,8 @@ const useProductStore = create((set, get) => ({
       category: 'Baby Dolls', 
       images: ['/placeholder.svg'],
       videos: [],
-      description: 'A cute baby doll with soft skin and bright blue eyes.'
+      description: 'A cute baby doll with soft skin and bright blue eyes.',
+      placeholderImage: '/placeholder.svg'
     },
     { 
       id: 3, 
@@ -27,7 +29,8 @@ const useProductStore = create((set, get) => ({
       category: 'Animal Dolls', 
       images: ['/placeholder.svg'],
       videos: [],
-      description: 'An adorable plush cat doll with silky fur and a pink bow.'
+      description: 'An adorable plush cat doll with silky fur and a pink bow.',
+      placeholderImage: '/placeholder.svg'
     },
     { 
       id: 4, 
@@ -36,7 +39,8 @@ const useProductStore = create((set, get) => ({
       category: 'Clothing Dolls', 
       images: ['/placeholder.svg'],
       videos: [],
-      description: 'A charming doll with a red polka dot dress and blonde hair.'
+      description: 'A charming doll with a red polka dot dress and blonde hair.',
+      placeholderImage: '/placeholder.svg'
     },
   ],
   cart: [],
