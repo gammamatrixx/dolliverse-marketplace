@@ -48,6 +48,12 @@ const useProductStore = create((set, get) => ({
   userDatabase: {
     admin: { password: 'admin123', isAdmin: true }
   },
+  carouselImages: [
+    '/placeholder.svg',
+    '/placeholder.svg',
+    '/placeholder.svg',
+    '/placeholder.svg',
+  ],
   updateProduct: (updatedProduct) =>
     set((state) => ({
       products: state.products.map((product) =>
@@ -100,6 +106,7 @@ const useProductStore = create((set, get) => ({
     return { success: true };
   },
   logout: () => set({ user: null }),
+  updateCarouselImages: (images) => set({ carouselImages: images }),
 }));
 
 export default useProductStore;
