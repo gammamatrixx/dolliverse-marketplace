@@ -38,6 +38,11 @@ export const Header = () => {
             <div className="flex items-center space-x-2">
               <UserCircle className="h-6 w-6" />
               <span>{user.username}</span>
+              {user.isAdmin && (
+                <Link to="/admin">
+                  <Button variant="outline" size="sm">Admin</Button>
+                </Link>
+              )}
               <Button variant="outline" size="sm" onClick={logout}>Logout</Button>
             </div>
           ) : (

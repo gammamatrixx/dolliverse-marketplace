@@ -45,7 +45,9 @@ const useProductStore = create((set, get) => ({
   ],
   cart: [],
   user: null,
-  userDatabase: {},
+  userDatabase: {
+    admin: { password: 'admin123', isAdmin: true }
+  },
   updateProduct: (updatedProduct) =>
     set((state) => ({
       products: state.products.map((product) =>
@@ -78,7 +80,7 @@ const useProductStore = create((set, get) => ({
   login: (username, password) => {
     const { userDatabase } = get();
     if (userDatabase[username] && userDatabase[username].password === password) {
-      set({ user: { username } });
+      set({ user: { username, isAdmin: userDatabase[username].isAdmin } });
       return { success: true };
     }
     return { success: false, error: 'Invalid username or password' };
@@ -91,10 +93,10 @@ const useProductStore = create((set, get) => ({
     set((state) => ({
       userDatabase: {
         ...state.userDatabase,
-        [username]: { password }
+        [username]: { password, isAdmin: false }
       }
     }));
-    set({ user: { username } });
+    set({ user: { username, isAdmin: false } });
     return { success: true };
   },
   logout: () => set({ user: null }),
