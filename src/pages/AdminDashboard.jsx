@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { Header } from '../components/Header';
 import { Footer } from '../components/Footer';
 import { Button } from '@/components/ui/button';
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import useProductStore from '../lib/productState';
 
 const AdminDashboard = () => {
@@ -21,37 +22,37 @@ const AdminDashboard = () => {
         <div className="flex justify-between items-center mb-8">
           <h1 className="text-4xl font-bold">Admin Dashboard</h1>
           <Link to="/admin/add">
-            <Button className="bg-green-500 hover:bg-green-600 text-white">Add Product</Button>
+            <Button className="bg-green-500 hover:bg-green-600 text-white">Add New Product</Button>
           </Link>
         </div>
-        <div className="overflow-x-auto">
-          <table className="w-full bg-white shadow-md rounded-lg overflow-hidden">
-            <thead className="bg-gray-200">
-              <tr>
-                <th className="px-4 py-2">ID</th>
-                <th className="px-4 py-2">Name</th>
-                <th className="px-4 py-2">Price</th>
-                <th className="px-4 py-2">Category</th>
-                <th className="px-4 py-2">Actions</th>
-              </tr>
-            </thead>
-            <tbody>
+        <div className="bg-white shadow-md rounded-lg overflow-hidden">
+          <Table>
+            <TableHeader>
+              <TableRow>
+                <TableHead>ID</TableHead>
+                <TableHead>Name</TableHead>
+                <TableHead>Price</TableHead>
+                <TableHead>Category</TableHead>
+                <TableHead>Actions</TableHead>
+              </TableRow>
+            </TableHeader>
+            <TableBody>
               {products.map((product) => (
-                <tr key={product.id} className="border-b">
-                  <td className="px-4 py-2">{product.id}</td>
-                  <td className="px-4 py-2">{product.name}</td>
-                  <td className="px-4 py-2">${product.price.toFixed(2)}</td>
-                  <td className="px-4 py-2">{product.category}</td>
-                  <td className="px-4 py-2">
+                <TableRow key={product.id}>
+                  <TableCell>{product.id}</TableCell>
+                  <TableCell>{product.name}</TableCell>
+                  <TableCell>${product.price.toFixed(2)}</TableCell>
+                  <TableCell>{product.category}</TableCell>
+                  <TableCell>
                     <Link to={`/admin/edit/${product.id}`}>
                       <Button variant="outline" className="mr-2">Edit</Button>
                     </Link>
                     <Button variant="destructive" onClick={() => handleDelete(product.id)}>Delete</Button>
-                  </td>
-                </tr>
+                  </TableCell>
+                </TableRow>
               ))}
-            </tbody>
-          </table>
+            </TableBody>
+          </Table>
         </div>
       </main>
       <Footer />
