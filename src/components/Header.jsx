@@ -40,7 +40,7 @@ export const Header = () => {
               <span>{user.username}</span>
               {user.isAdmin && (
                 <Link to="/admin">
-                  <Button variant="outline" size="sm">Admin</Button>
+                  <Button variant="outline" size="sm">Admin Dashboard</Button>
                 </Link>
               )}
               <Button variant="outline" size="sm" onClick={logout}>Logout</Button>
