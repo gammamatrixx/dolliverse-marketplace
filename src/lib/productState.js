@@ -106,7 +106,14 @@ const useProductStore = create((set, get) => ({
     return { success: true };
   },
   logout: () => set({ user: null }),
-  updateCarouselImages: (images) => set({ carouselImages: images }),
+  addCarouselImage: (imageUrl) =>
+    set((state) => ({
+      carouselImages: [...state.carouselImages, imageUrl],
+    })),
+  removeCarouselImage: (index) =>
+    set((state) => ({
+      carouselImages: state.carouselImages.filter((_, i) => i !== index),
+    })),
 }));
 
 export default useProductStore;

@@ -7,20 +7,22 @@ export const Carousel = () => {
   const { carouselImages } = useProductStore();
 
   return (
-    <ShadcnCarousel className="w-full max-w-4xl mx-auto">
-      <CarouselContent>
-        {carouselImages.map((image, index) => (
-          <CarouselItem key={index}>
-            <Card>
-              <CardContent className="flex aspect-square items-center justify-center p-6">
-                <img src={image} alt={`Slide ${index + 1}`} className="w-full h-full object-cover" />
-              </CardContent>
-            </Card>
-          </CarouselItem>
-        ))}
-      </CarouselContent>
-      <CarouselPrevious />
-      <CarouselNext />
-    </ShadcnCarousel>
+    <div className="w-full">
+      <ShadcnCarousel className="w-full">
+        <CarouselContent>
+          {carouselImages.map((image, index) => (
+            <CarouselItem key={index}>
+              <Card className="border-none">
+                <CardContent className="flex aspect-[16/9] items-center justify-center p-0">
+                  <img src={image} alt={`Slide ${index + 1}`} className="w-full h-full object-cover" />
+                </CardContent>
+              </Card>
+            </CarouselItem>
+          ))}
+        </CarouselContent>
+        <CarouselPrevious />
+        <CarouselNext />
+      </ShadcnCarousel>
+    </div>
   );
 };
