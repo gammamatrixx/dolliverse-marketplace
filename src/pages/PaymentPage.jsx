@@ -25,27 +25,14 @@ const PaymentPage = () => {
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    try {
-      const response = await fetch('/api/process-payment', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formData),
-      });
-
-      if (response.ok) {
-        alert('Payment successful! Thank you for your purchase.');
-        clearCart();
-        navigate('/');
-      } else {
-        throw new Error('Payment failed');
-      }
-    } catch (error) {
-      alert('Payment failed. Please try again.');
-    }
+    // Simulate a successful payment without making an API call
+    setTimeout(() => {
+      alert('Payment successful! Thank you for your purchase.');
+      clearCart();
+      navigate('/');
+    }, 1000);
   };
 
   return (
