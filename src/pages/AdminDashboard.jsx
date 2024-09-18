@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { Header } from '../components/Header';
 import { Footer } from '../components/Footer';
@@ -10,6 +10,7 @@ import useProductStore from '../lib/productState';
 const AdminDashboard = () => {
   const { products, deleteProduct, carouselImages, addCarouselImage, removeCarouselImage } = useProductStore();
   const [newImageUrl, setNewImageUrl] = useState('');
+  const fileInputRef = useRef(null);
 
   const handleDelete = (id) => {
     if (window.confirm('Are you sure you want to delete this product?')) {
@@ -26,6 +27,21 @@ const AdminDashboard = () => {
 
   const handleRemoveCarouselImage = (index) => {
     removeCarouselImage(index);
+  };
+
+  const handleFileUpload = (event) => {
+    const file = event.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        addCarouselImage(e.target.result);
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
+  const triggerFileInput = () => {
+    fileInputRef.current.click();
   };
 
   return (
@@ -49,7 +65,15 @@ const AdminDashboard = () => {
               onChange={(e) => setNewImageUrl(e.target.value)}
               className="flex-grow mr-2"
             />
-            <Button onClick={handleAddCarouselImage}>Add Image</Button>
+            <Button onClick={handleAddCarouselImage} className="mr-2">Add Image URL</Button>
+            <input
+              type="file"
+              ref={fileInputRef}
+              onChange={handleFileUpload}
+              accept="image/*"
+              className="hidden"
+            />
+            <Button onClick={triggerFileInput}>Upload Image</Button>
           </div>
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
             {carouselImages.map((image, index) => (
