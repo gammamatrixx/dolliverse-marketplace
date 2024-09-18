@@ -41,14 +41,12 @@ const App = () => (
               case "Animal Dolls":
                 Component = AnimalDolls;
                 break;
-              case "Admin":
-                Component = AdminDashboard;
-                break;
               default:
                 Component = Index;
             }
             return <Route key={to} path={to} element={<Component />} />;
           })}
+          <Route path="/admin" element={<AdminDashboard />} />
           <Route path="/admin/edit/:id" element={<AdminProductEdit />} />
           <Route path="/admin/add" element={<AdminProductForm mode="add" />} />
           <Route path="/cart" element={<CartPage />} />
